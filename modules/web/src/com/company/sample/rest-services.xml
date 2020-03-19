@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services xmlns="http://schemas.haulmont.com/cuba/rest-services-v2.xsd">
+    <service name="sample_ExternalBprocService">
+        <method name="getUserTasks"/>
+        <method name="startProcessInstanceByKey">
+            <param name="processDefinitionKey"/>
+            <param name="businessKey"/>
+            <param name="processVariables"/>
+        </method>
+        <method name="completeUserTask">
+            <param name="taskId"/>
+            <param name="outcome"/>
+            <param name="processVariables"/>
+        </method>
+        <method name="getTaskFormData">
+            <param name="taskId"/>
+        </method>
+    </service>
+</services>
+

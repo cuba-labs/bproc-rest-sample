@@ -1,0 +1,52 @@
+### Get access token
+
+POST http://localhost:8080/app/rest/v2/oauth/token
+Authorization: Basic client secret
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=password&username=admin&password=admin
+
+> {% client.global.set("access_token", response.body.access_token); %}
+
+### Start process instance by key
+
+POST http://localhost:8080/app/rest/v2/services/sample_ExternalBprocService/startProcessInstanceByKey
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+
+{
+  "processDefinitionKey": "test-process-1",
+  "businessKey": "test-03",
+  "processVariables": {
+    "var1": "val1",
+    "var2": 1
+  }
+}
+
+### Get user tasks
+
+GET http://localhost:8080/app/rest/v2/services/sample_ExternalBprocService/getUserTasks
+Authorization: Bearer {{access_token}}
+
+### Get task form data
+
+GET http://localhost:8080/app/rest/v2/services/sample_ExternalBprocService/getTaskFormData?taskId=be95127a-c2eb-02de-0618-e4777a30fcd4
+Authorization: Bearer {{access_token}}
+
+
+### Complete user task by id
+
+POST http://localhost:8080/app/rest/v2/services/sample_ExternalBprocService/completeUserTask
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+
+{
+  "taskId": "be95127a-c2eb-02de-0618-e4777a30fcd4",
+  "outcome": "approve",
+  "processVariables": {
+    "var1": "val2",
+    "var2": 3
+  }
+}
+
+###
